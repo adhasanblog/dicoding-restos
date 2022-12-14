@@ -25,12 +25,18 @@ const Home = {
     const heroSliderContainer = document.querySelector('#hero-slider');
     const restosContainer = document.querySelector('#restos');
     const buttonLoadMore = document.querySelector('#loadMoreResto');
+    let limit =
+      HomePageHelper.limitBasedOnViewport({
+        xl: 5,
+        lg: 4,
+        md: 3,
+      }) || 4;
 
     HomePageHelper.showList({
       datas: await restos,
       container: restosContainer,
       dataCount: 0,
-      limit: 4,
+      limit,
     });
 
     buttonLoadMore.addEventListener('click', async () => {
@@ -38,13 +44,11 @@ const Home = {
         HomePageHelper.showList({
           datas: await restos,
           container: restosContainer,
-          dataCount: 4,
+          dataCount: limit,
           limit: restos.length,
         });
 
-        if (restos.length === 20) {
-          buttonLoadMore.style.display = 'none';
-        }
+        buttonLoadMore.style.display = 'none';
       }, 500);
     });
   },

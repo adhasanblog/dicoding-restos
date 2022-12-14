@@ -30,11 +30,14 @@
   }
 
   button {
-    width: 300px;
+    width: 100%;
+    max-width: 300px;
+    min-width: 150px;
     padding: 18px 0;
-    align-self: center;
+    margin: 0 24px;
     background-color: rgba($color: #fdc886, $alpha: 1);
 
+    align-self: center;
     font-weight: 600;
     color: rgba($color: #232631, $alpha: 1);
     border: none;

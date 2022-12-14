@@ -1,5 +1,6 @@
 import { async } from 'regenerator-runtime';
 import '../style/main.scss';
+import HomePageHelper from './utils/homepage-helper';
 import App from './views/app';
 
 const app = new App({
