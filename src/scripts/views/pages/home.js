@@ -22,7 +22,6 @@ const Home = {
 
   async afterRender() {
     const restos = await RestaurantDataSource.restoList();
-    const heroSliderContainer = document.querySelector('#hero-slider');
     const restosContainer = document.querySelector('#restos');
     const buttonLoadMore = document.querySelector('#loadMoreResto');
     let limit =
@@ -32,7 +31,7 @@ const Home = {
         md: 3,
       }) || 4;
 
-    HomePageHelper.showList({
+    HomePageHelper.showListResto({
       datas: await restos,
       container: restosContainer,
       dataCount: 0,
@@ -41,7 +40,7 @@ const Home = {
 
     buttonLoadMore.addEventListener('click', async () => {
       setTimeout(async () => {
-        HomePageHelper.showList({
+        HomePageHelper.showListResto({
           datas: await restos,
           container: restosContainer,
           dataCount: limit,

@@ -1,0 +1,52 @@
+.resto-filter {
+  display: flex;
+  max-width: 1320px;
+  margin: auto;
+  padding: 12px 24px;
+  justify-content: space-between;
+
+  .filter-container {
+    position: relative;
+    width: 200px;
+    min-width: 100px;
+
+    .filter {
+      width: 100%;
+      position: absolute;
+      z-index: 99;
+
+      background-color: rgba($color: #fff4e7, $alpha: 1);
+      display: none;
+      flex-direction: column;
+      gap: 12px;
+
+      &.open {
+        display: flex;
+      }
+
+      li {
+        position: relative;
+        padding: 12px 0;
+        list-style: none;
+
+        input[type='checkbox'] {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .search {
+    display: flex;
+    gap: 12px;
+
+    &__input {
+      padding: 6px 12px;
+      border-radius: 6px;
+
+      &::placeholder {
+        font-style: italic;
+      }
+    }
+  }
+}

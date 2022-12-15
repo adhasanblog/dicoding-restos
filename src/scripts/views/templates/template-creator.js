@@ -24,4 +24,8 @@ const createRestoItemTemplate = (resto) => `
     </div>
 `;
 
-export { createHeroTemplate, createRestoItemTemplate };
+const createFilterTemplate = (category) => `
+    <li><input type="checkbox" name="${category}"><label for="${category}">${category}</label></li>
+`;
+
+export { createHeroTemplate, createRestoItemTemplate, createFilterTemplate };
