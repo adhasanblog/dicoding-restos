@@ -1,6 +1,7 @@
 import { async } from 'regenerator-runtime';
+import '@fortawesome/fontawesome-free/js/fontawesome';
+import '@fortawesome/fontawesome-free/js/solid';
 import '../style/main.scss';
-import HomePageHelper from './utils/homepage-helper';
 import App from './views/app';
 
 const app = new App({

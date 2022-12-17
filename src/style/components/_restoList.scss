@@ -3,6 +3,20 @@
   flex-direction: column;
   gap: 30px;
 
+  .restos-not-found {
+    display: block;
+    width: 100%;
+    max-width: 1320px;
+    margin: auto;
+    padding: 12px 24px;
+
+    p {
+      font-size: 24px;
+      font-style: italic;
+      color: rgba($color: #232631, $alpha: 0.4);
+    }
+  }
+
   .restos {
     display: grid;
     grid-template-columns: 1fr;

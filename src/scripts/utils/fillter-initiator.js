@@ -1,5 +1,9 @@
 import RestaurantDataSource from '../data/restaurant-datasource';
-import { createRestoItemTemplate } from '../views/templates/template-creator';
+import SweetAlert from '../global/sweetalert2';
+import {
+  createRestoItemTemplate,
+  createRestoNotFound,
+} from '../views/templates/template-creator';
 
 const FilterInitiator = {
   init({ button, input, container }) {
@@ -20,13 +24,18 @@ const FilterInitiator = {
     }
     const results = await RestaurantDataSource.restoSearch(query);
 
-    console.log(results);
-    if (results.length === 0) {
-      container.innerHTML = `Data Tidak Ditemukan Brother`;
+    if (!results.length) {
+      SweetAlert.loading();
+
+      setTimeout(() => {
+        container.className = 'restos-not-found';
+        container.innerHTML = createRestoNotFound;
+      }, 1500);
 
       return;
     }
     results.forEach((result) => {
+      container.className = 'restos';
       container.innerHTML += createRestoItemTemplate(result);
     });
   },

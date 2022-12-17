@@ -3,12 +3,12 @@
   max-width: 1320px;
   margin: auto;
   padding: 12px 24px;
-  justify-content: space-between;
 
   .filter-container {
     position: relative;
     width: 200px;
     min-width: 100px;
+    flex: 1 1 0;
 
     .filter {
       width: 100%;
@@ -37,7 +37,9 @@
   }
 
   .search {
+    flex: 1 1 0;
     display: flex;
+    justify-content: flex-end;
     gap: 12px;
 
     &__input {
@@ -47,6 +49,14 @@
       &::placeholder {
         font-style: italic;
       }
+    }
+
+    &__button {
+      padding: 12px 12px;
+      background-color: #fdc886;
+      border: none;
+      border-radius: 24px;
+      cursor: pointer;
     }
   }
 }
