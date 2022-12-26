@@ -21,18 +21,15 @@ class RestaurantDataSource {
     return responseJSON.restaurants;
   }
 
-  static async restoReview({ restoId, customerName, customerReview }) {
+  static async restoReview(customerReview) {
     const response = await fetch(API_ENDPOINT.REVIEW, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded | application/json',
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        id: restoId,
-        name: customerName,
-        review: customerReview,
-      }),
+      body: JSON.stringify(customerReview),
     });
+
     const responseJSON = await response.json();
     return responseJSON.customerReviews;
   }

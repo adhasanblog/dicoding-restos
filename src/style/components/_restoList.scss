@@ -1,7 +1,8 @@
 .resto-list {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  max-width: 1320px;
+  margin: auto;
 
   .restos-not-found {
     display: block;
@@ -17,46 +18,22 @@
     }
   }
 
-  .restos {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 12px 24px;
-
-    @media screen and (min-width: 650px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    @media screen and (min-width: 850px) {
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    @media screen and (min-width: 1200px) {
-      grid-template-columns: repeat(4, 1fr);
-    }
-    @media screen and (min-width: 1320px) {
-      max-width: 1320px;
-      margin: auto;
-    }
-    @media screen and (min-width: 1600px) {
-      grid-template-columns: repeat(5, 1fr);
-    }
-  }
-
-  button {
+  a {
     width: 100%;
     max-width: 300px;
     min-width: 150px;
     padding: 18px 0;
-    margin: 0 24px;
+    margin: 24px 24px;
     background-color: rgba($color: #fdc886, $alpha: 1);
 
-    align-self: center;
+    text-align: center;
+    text-decoration: none;
     font-weight: 600;
     color: rgba($color: #232631, $alpha: 1);
     border: none;
     border-radius: 12px;
 
+    align-self: center;
     cursor: pointer;
   }
 }

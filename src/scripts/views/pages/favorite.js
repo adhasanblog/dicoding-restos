@@ -1,7 +1,8 @@
+import NowLoading from '../templates/Loading';
+
 const Favorite = {
   async render() {
     return `
-        <h2>Ini Punya Favorite Bos</h2>
     `;
   },
 

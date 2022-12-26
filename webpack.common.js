@@ -7,7 +7,7 @@ module.exports = {
     app: path.resolve(__dirname, 'src/scripts/index.js'),
   },
   output: {
-    filename: '[name].bundle.js',
+    filename: '[name].[contentHash].bundle.js',
     path: path.resolve(__dirname, 'dist'),
     clean: true,
   },

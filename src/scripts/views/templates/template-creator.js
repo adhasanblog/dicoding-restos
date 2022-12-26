@@ -50,7 +50,17 @@ const createRestoDetailHeaderTemplate = (resto) => `
             <span>${resto.address}</span>
         </p>
     </div>
-
+    <div class="resto__header__action">
+        <button>
+            <i class="fa-solid fa-star"></i>
+        </button>
+        <button>
+            <i class="fa-regular fa-heart"></i>
+        </button>     
+        <button>
+            <i class="fa-solid fa-pen"></i>
+        </button>        
+    </div>
 `;
 
 const createRestoDetailHeroTemplate = (resto) => `
@@ -96,12 +106,14 @@ const createRestoDetailContentTemplate = (resto) => `
             </div>
         </div>
     </div>
-    <div class="resto__content__review">
-        <h3>${resto.customerReviews.length} Ulasan Pelanggan</h3>
-        <div class="review-list">
-            ${resto.customerReviews
-              .map(
-                (customer) => `
+`;
+
+const createRestoDetailReviewTemplate = (resto) => `
+    <h3>${resto.customerReviews.length} Ulasan Pelanggan</h3>
+    <div class="review-list">
+        ${resto.customerReviews
+          .map(
+            (customer) => `
                 <div class="review-list__item">
                     <div class="review-image">
                         <i class="fa-solid fa-user-large"></i>
@@ -112,16 +124,8 @@ const createRestoDetailContentTemplate = (resto) => `
                     </div>
                 </div>
                 `,
-              )
-              .join('')}
-        </div>
-        <form class="review-form">
-            <label for="name">Nama</label>
-            <input type="text" name="name">
-            <label for="review">Ulasan</label>
-            <textarea name="review" maxlength="120"></textarea>
-            <input type="submit" value="Kirim Ulasan">
-        </form>
+          )
+          .join('')}
     </div>
 `;
 
@@ -133,4 +137,5 @@ export {
   createRestoDetailHeaderTemplate,
   createRestoDetailHeroTemplate,
   createRestoDetailContentTemplate,
+  createRestoDetailReviewTemplate,
 };

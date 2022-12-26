@@ -7,18 +7,18 @@ import {
 import FilterInitiator from './fillter-initiator';
 
 const RestaurantPageHelper = {
-  async dataRestaurant({ restosContainer, filterContainer }) {
+  async init({ container }) {
     const restos = await RestaurantDataSource.restoList();
 
-    this._showRestaurantList({
+    this._showCardListSection({
       datas: restos,
-      container: restosContainer,
+      container: container.restaurant,
     });
-
-    this._showfilterCategory({
-      datas: restos,
-      container: filterContainer,
-    });
+  },
+  _showCardListSection({ datas, container }) {
+    const cardList = document.createElement('card-list');
+    cardList.datas = datas;
+    container.appendChild(cardList);
   },
 
   _showRestaurantList({ datas, container }) {

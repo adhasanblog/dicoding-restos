@@ -1,4 +1,4 @@
-import RestaurantPageHelper from '../../utils/restaurantpage-helper';
+import RestaurantPageHelper from '../../utils/restaurant-page-helper';
 
 const Restaurant = {
   async render() {
@@ -14,8 +14,7 @@ const Restaurant = {
           <input type="submit" id="submit" class="search__button" value="Search">
         </form>
       </section>
-      <section class="resto-list" aria-label="Restaurant List">
-        <div id="restos" class="restos"></div>
+      <section id="restoSection" class="resto-list" aria-label="Restaurant List">
       </section>
     `;
   },
@@ -25,16 +24,12 @@ const Restaurant = {
     const filterContainer = document.querySelector('#filter');
     const searchButton = document.querySelector('#formSearch');
     const searchInput = document.querySelector('#searchInput');
+    const restaurantsSection = document.querySelector('#restoSection');
 
-    RestaurantPageHelper.searchRestoByQuery({
-      input: searchInput,
-      button: searchButton,
-      container: restosContainer,
-    });
-
-    RestaurantPageHelper.dataRestaurant({
-      restosContainer,
-      filterContainer,
+    RestaurantPageHelper.init({
+      container: {
+        restaurant: restaurantsSection,
+      },
     });
   },
 };

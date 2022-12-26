@@ -1,42 +1,25 @@
+import RestaurantDataSource from '../../data/restaurant-datasource';
 import UrlParser from '../../routes/url-parse';
-import DetailPageHelper from '../../utils/detailpage-helper';
-import MenuRestoInitiator from '../../utils/menu-resto-initiator';
+import DetailPageHelper from '../../utils/detail-page-helper';
+import SubmitReviewInitiator from '../../utils/submit-review-initiator';
 
 const Detail = {
   async render() {
     return `
-        <div class="resto">
-          <div id="restoHero" class="resto__hero">
-          </div>
-          <div id="restoHeader" class="resto__header">   
-          </div>
-          <div id="restoContainer" class="resto__content">
-          </div>
-        </div>
+       <article>
+       
+       </article>
 
     `;
   },
 
   async afterRender() {
     const url = UrlParser.parseActiveUrlWithoutCombiner();
-    const restoHeaderContainer = document.querySelector('#restoHeader');
-    const restoHeroContainer = document.querySelector('#restoHero');
-    const restoContentContainer = document.querySelector('#restoContainer');
+    const articleContainer = document.querySelector('article');
 
-    await DetailPageHelper.restoDetail({
-      url,
-      header: restoHeaderContainer,
-      hero: restoHeroContainer,
-      content: restoContentContainer,
-    });
-
-    MenuRestoInitiator.init({
-      foodList: document.querySelector('#foodList'),
-      drinkList: document.querySelector('#drinkList'),
-      foodNav: document.querySelector('#foodNav'),
-      drinkNav: document.querySelector('#drinkNav'),
-      food: document.querySelector('#food'),
-      drink: document.querySelector('#drink'),
+    DetailPageHelper.init({
+      id: url.id,
+      container: articleContainer,
     });
   },
 };

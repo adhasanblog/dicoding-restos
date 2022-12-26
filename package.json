@@ -14,6 +14,7 @@
   "devDependencies": {
     "@babel/core": "^7.20.5",
     "@babel/preset-env": "^7.20.2",
+    "@lit-labs/motion": "^1.0.3",
     "babel-loader": "^9.1.0",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^11.0.0",
@@ -23,6 +24,7 @@
     "eslint-plugin-import": "^2.26.0",
     "html-webpack-plugin": "^5.5.0",
     "http-serve": "^1.0.1",
+    "lit": "^2.5.0",
     "sass": "^1.56.2",
     "sass-loader": "^13.2.0",
     "style-loader": "^3.3.1",

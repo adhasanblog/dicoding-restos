@@ -6,39 +6,17 @@
 
   padding: 12px 24px;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   background-color: rgba($color: #ffffff, $alpha: 1);
-
-  &__brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    h1 {
-      color: #232631;
-      font-size: 1.75rem;
-    }
-  }
-
-  &__menu {
-    justify-self: end;
-    button {
-      background-color: transparent;
-      border: none;
-      font-size: 20px;
-      padding: 8px;
-      cursor: pointer;
-    }
-  }
 
   &__navigation {
     position: absolute;
     width: 40%;
     max-width: 250px;
     min-width: 150px;
-    top: calc(70px + 20px);
-    right: 20px;
-    background-color: #fff4e7;
+    top: calc(70px);
+    left: 0;
+    background-color: #fdc886;
     transform-origin: top;
     transform: scaleY(0);
     transition: all 0.5s ease-in-out;
@@ -59,6 +37,7 @@
         a {
           position: relative;
           font-size: 1rem;
+          font-weight: 600;
           text-decoration: none;
           color: rgba($color: #232631, $alpha: 0.75);
         }
@@ -66,7 +45,50 @@
     }
   }
 
-  @media screen and (min-width: 700px) {
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-self: center;
+
+    h1 {
+      color: #232631;
+      font-size: 1.75rem;
+    }
+  }
+
+  &__search {
+    width: 45px;
+    height: 45px;
+    justify-self: right;
+    padding: 12px 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: rgba(35, 38, 49, 0.75);
+
+    border-radius: 50%;
+    border: 0;
+    z-index: 9999;
+  }
+
+  &__menu {
+    button {
+      background-color: transparent;
+      border: none;
+      font-size: 20px;
+      padding: 8px;
+      cursor: pointer;
+    }
+  }
+
+  search-bar.active {
+    transform: translateY(0);
+  }
+
+  @media screen and (min-width: 1020px) {
     &__menu {
       display: none;
     }
@@ -75,7 +97,6 @@
       width: auto;
       max-width: inherit;
       position: static;
-      justify-self: end;
       background-color: transparent;
       transform: none;
 
