@@ -10,19 +10,22 @@ import MenuRestaurant from './Menu';
 import DescriptionRestaurant from './Description';
 import ReviewRestaurant from './Review';
 import FormReview from './Form';
+import FooterRestaurant from './Footer';
 
 export default class DetailPage extends LitElement {
   static properties = {
-    id: {},
-    restaurant: {},
-    loading: {},
+    id: { type: String },
+    restaurant: { type: Object },
+    restaurants: { type: Array },
+    loading: { type: Boolean },
     tabs: { type: Array },
   };
 
   constructor() {
     super();
-    this.id = null;
-    this.restaurant = null;
+    this.id = '';
+    this.restaurants = [];
+    this.restaurant = {};
     this.loading = true;
     this.customerReview = {};
   }
@@ -38,8 +41,11 @@ export default class DetailPage extends LitElement {
   }
 
   async fetchApi(id) {
+    const restaurants = await RestaurantDataSource.restoList();
+    this.restaurants = restaurants;
     const restaurant = await RestaurantDataSource.restoDetail(id);
     this.restaurant = restaurant;
+
     setTimeout(() => {
       this.loading = false;
     }, 700);
@@ -67,6 +73,10 @@ export default class DetailPage extends LitElement {
       <header-restaurant .restaurant=${this.restaurant}></header-restaurant>
       <hero-banner .image=${this.restaurant}></hero-banner>
       <content-restaurant .restaurant=${this.restaurant}></content-restaurant>
+      <footer-restaurant
+        .restaurants=${this.restaurants}
+        .restaurant=${this.restaurant}>
+      </footer-restaurant>
     `;
   }
 

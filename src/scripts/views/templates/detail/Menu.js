@@ -34,6 +34,10 @@ export default class MenuRestaurant extends LitElement {
       text-align: center;
     }
 
+    img {
+      border-radius: 12px;
+    }
+
     @media screen and (min-width: 550px) {
       .menus {
         grid-template-columns: repeat(2, 1fr);
@@ -60,7 +64,7 @@ export default class MenuRestaurant extends LitElement {
         ${map(
           this.menus.foods,
           (food) => html`
-            <div>
+            <div class="menu-item">
               <img src="./images/dummy-image.jpg" alt="" />
               <h4>${food.name}</h4>
             </div>
@@ -72,7 +76,7 @@ export default class MenuRestaurant extends LitElement {
         ${map(
           this.menus.drinks,
           (drink) => html`
-            <div>
+            <div class="menu-item">
               <img src="./images/dummy-image.jpg" alt="" />
               <h3>${drink.name}</h3>
             </div>

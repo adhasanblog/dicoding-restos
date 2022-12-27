@@ -47,7 +47,10 @@ export default class ReviewRestaurant extends LitElement {
       display: flex;
       justify-content: space-between;
     }
-
+    .review-item svg {
+      position: absolute;
+      right: 24px;
+    }
     .customer {
       display: flex;
       align-items: center;

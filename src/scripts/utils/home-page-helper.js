@@ -7,7 +7,6 @@ import SearchBar from '../views/templates/SearchBar';
 const HomePageHelper = {
   async init({ container }) {
     const restos = await RestaurantDataSource.restoList();
-
     this._showCardListSection({
       datas: restos,
       container: container.restaurant,
