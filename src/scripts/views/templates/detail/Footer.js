@@ -1,5 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { map } from 'lit/directives/map.js';
+import RestaurantDataSource from '../../../data/restaurant-datasource';
 import CardList from '../CardList';
 
 export default class FooterRestaurant extends LitElement {
@@ -36,9 +37,21 @@ export default class FooterRestaurant extends LitElement {
     }
   `;
 
+  connectedCallback() {
+    super.connectedCallback();
+    this.fetchApiList();
+  }
+
+  async fetchApiList() {
+    const restaurants = await RestaurantDataSource.restoList();
+    this.restaurants = restaurants;
+  }
+
   render() {
     this.sameCityRestaurants = this.restaurants.filter(
-      (restaurant) => restaurant.city === this.restaurant.city,
+      (restaurant) =>
+        restaurant.city === this.restaurant.city &&
+        restaurant.name !== this.restaurant.name,
     );
 
     return html`

@@ -5,6 +5,7 @@ const CONFIG = {
     medium: 'https://restaurant-api.dicoding.dev/images/medium/',
     large: 'https://restaurant-api.dicoding.dev/images/large/',
   },
+  CACHE_NAME: 'Restos-RestaurantDatabook-V1',
 };
 
 export default CONFIG;

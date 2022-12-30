@@ -1,10 +1,12 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   entry: {
-    app: path.resolve(__dirname, 'src/scripts/index.js'),
+    main: path.resolve(__dirname, 'src/scripts/index.js'),
+    vendor: path.resolve(__dirname, 'src/scripts/vendor.js'),
   },
   output: {
     filename: '[name].[contentHash].bundle.js',
@@ -18,7 +20,7 @@ module.exports = {
         test: /\.s[ac]ss$/i,
         use: [
           {
-            loader: 'style-loader',
+            loader: MiniCssExtractPlugin.loader,
           },
           {
             loader: 'css-loader',
@@ -44,6 +46,10 @@ module.exports = {
           to: path.resolve(__dirname, 'dist/'),
         },
       ],
+    }),
+
+    new MiniCssExtractPlugin({
+      filename: 'style.css',
     }),
   ],
 };

@@ -5,6 +5,7 @@ import { async } from 'regenerator-runtime';
 
 import HeaderRestaurant from './Header';
 import HeroBanner from '../HeroBanner';
+import ButtonFavorite from './ButtonFavorite';
 import ContentRestaurant from './Content';
 import MenuRestaurant from './Menu';
 import DescriptionRestaurant from './Description';
@@ -27,28 +28,26 @@ export default class DetailPage extends LitElement {
     this.restaurants = [];
     this.restaurant = {};
     this.loading = true;
-    this.customerReview = {};
   }
 
-  async connectedCallback() {
+  connectedCallback() {
     super.connectedCallback();
-
-    this.fetchApi(this.id);
-    document.addEventListener('submit-review', (event) => {
-      this.customerReview = event.detail;
-      this.submitReview();
+    document.addEventListener('review-submitted', () => {
+      this.updateReview();
     });
   }
 
-  async fetchApi(id) {
-    const restaurants = await RestaurantDataSource.restoList();
-    this.restaurants = restaurants;
-    const restaurant = await RestaurantDataSource.restoDetail(id);
-    this.restaurant = restaurant;
+  firstUpdated() {
+    this.fetchApiDetail(this.id);
 
     setTimeout(() => {
       this.loading = false;
-    }, 700);
+    }, 500);
+  }
+
+  async fetchApiDetail(id) {
+    const restaurant = await RestaurantDataSource.restoDetail(id);
+    this.restaurant = restaurant;
   }
 
   static styles = css`
@@ -72,18 +71,14 @@ export default class DetailPage extends LitElement {
     return html`
       <header-restaurant .restaurant=${this.restaurant}></header-restaurant>
       <hero-banner .image=${this.restaurant}></hero-banner>
+      <button-favorite></button-favorite>
       <content-restaurant .restaurant=${this.restaurant}></content-restaurant>
-      <footer-restaurant
-        .restaurants=${this.restaurants}
-        .restaurant=${this.restaurant}>
-      </footer-restaurant>
+      <footer-restaurant .restaurant=${this.restaurant}> </footer-restaurant>
     `;
   }
 
-  async submitReview() {
-    await RestaurantDataSource.restoReview(this.customerReview);
-    this.fetchApi(this.id);
-    console.log(this.customerReview);
+  updateReview() {
+    this.fetchApiDetail(this.id);
   }
 }
 

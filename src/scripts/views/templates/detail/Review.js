@@ -122,7 +122,6 @@ export default class ReviewRestaurant extends LitElement {
     let offset = 0;
     let limit = 5;
     const { customerReviews } = this.restaurant;
-    console.log(totalPage);
     return html`
       <div class="reviews">
         <h3>
@@ -152,7 +151,6 @@ export default class ReviewRestaurant extends LitElement {
             </div>
           `,
         )}
-
         <nav class="review-paging">
           <ul>
             ${map(

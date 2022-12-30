@@ -1,8 +1,7 @@
-import { async } from 'regenerator-runtime';
+import './vendor';
 import '../style/main.scss';
 import App from './views/app';
-import '@fortawesome/fontawesome-free/js/fontawesome';
-import '@fortawesome/fontawesome-free/js/solid';
+import swRegister from './utils/sw-register';
 
 const app = new App({
   button: {
@@ -20,4 +19,5 @@ window.addEventListener('hashchange', () => {
 
 window.addEventListener('load', () => {
   app.renderPage();
+  swRegister();
 });

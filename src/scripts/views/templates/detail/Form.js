@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit';
+import RestaurantDataSource from '../../../data/restaurant-datasource';
 
 export default class FormReview extends LitElement {
   static properties = {
@@ -56,6 +57,16 @@ export default class FormReview extends LitElement {
     }
   `;
 
+  getInputName(event) {
+    const input = event.target;
+    this.customerReview.name = input.value;
+  }
+
+  getInputDescription(event) {
+    const input = event.target;
+    this.customerReview.review = input.value;
+  }
+
   render() {
     return html`
       <h3>Share Your Experience</h3>
@@ -75,28 +86,16 @@ export default class FormReview extends LitElement {
     `;
   }
 
-  getInputName(event) {
-    const input = event.target;
-    this.customerReview.name = input.value;
-  }
-
-  getInputDescription(event) {
-    const input = event.target;
-    this.customerReview.review = input.value;
-  }
-
-  sendReviewHandler(event) {
+  async sendReviewHandler(event) {
     event.preventDefault();
-    const submitReviewEvent = new CustomEvent('submit-review', {
-      detail: {
-        id: this.restaurantId,
-        name: this.customerReview.name,
-        review: this.customerReview.review,
-      },
-    });
-
-    document.dispatchEvent(submitReviewEvent);
+    const detail = {
+      id: this.restaurantId,
+      name: this.customerReview.name,
+      review: this.customerReview.review,
+    };
+    await RestaurantDataSource.restoReview(detail);
     this.shadowRoot.querySelector('form').reset();
+    document.dispatchEvent(new Event('review-submitted'));
   }
 }
 
