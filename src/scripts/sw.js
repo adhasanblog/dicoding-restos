@@ -21,7 +21,7 @@ self.addEventListener('install', () => {
 registerRoute(
   API_ENDPOINT.LIST,
   new CacheFirst({
-    cacheName: 'api-restaurant',
+    cacheName: 'restaurant-api',
     plugins: [
       new ExpirationPlugin({
         maxEntries: 50,
