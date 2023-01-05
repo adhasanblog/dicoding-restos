@@ -11,6 +11,11 @@ import {
 
 import API_ENDPOINT from './global/api-endpoint';
 
+self.__WB_MANIFEST.push({
+  url: /^\/bundle.*\.js$/,
+  revision: 'abcd1234',
+});
+
 precacheAndRoute(self.__WB_MANIFEST, {
   strategy: 'CacheFirst',
   cleanupOutdatedCaches: true,
