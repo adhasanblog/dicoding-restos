@@ -23,7 +23,7 @@ self.addEventListener('install', () => {
 
 registerRoute(
   API_ENDPOINT.LIST,
-  new StaleWhileRevalidate({
+  new CacheFirst({
     cacheName: 'restaurant-list',
     skipWaiting: true,
     plugins: [
