@@ -11,15 +11,17 @@ import {
 
 import API_ENDPOINT from './global/api-endpoint';
 
-const manifest = self.__WB_MANIFEST;
-
-manifest.push({
-  url: /^\/bundle.*\.js$/,
-  revision: 'abcd1234',
-});
-
-precacheAndRoute(manifest, {
-  strategy: 'CacheFirst',
+precacheAndRoute(self.__WB_MANIFEST, {
+  handleFetch: new StaleWhileRevalidate({
+    cacheName: 'restaurant-list',
+    skipWaiting: true,
+    plugins: [
+      new ExpirationPlugin({
+        maxEntries: 50,
+        maxAgeSeconds: 24 * 60 * 60,
+      }),
+    ],
+  }),
   cleanupOutdatedCaches: true,
 });
 
@@ -30,7 +32,7 @@ self.addEventListener('install', () => {
 
 // registerRoute(
 //   API_ENDPOINT.LIST,
-//   new CacheFirst({
+//   new StaleWhileRevalidate({
 //     cacheName: 'restaurant-list',
 //     skipWaiting: true,
 //     plugins: [
