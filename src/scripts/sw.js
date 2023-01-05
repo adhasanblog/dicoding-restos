@@ -11,12 +11,14 @@ import {
 
 import API_ENDPOINT from './global/api-endpoint';
 
-self.__WB_MANIFEST.push({
+const manifest = self.__WB_MANIFEST;
+
+manifest.push({
   url: /^\/bundle.*\.js$/,
   revision: 'abcd1234',
 });
 
-precacheAndRoute(self.__WB_MANIFEST, {
+precacheAndRoute(manifest, {
   strategy: 'CacheFirst',
   cleanupOutdatedCaches: true,
 });
