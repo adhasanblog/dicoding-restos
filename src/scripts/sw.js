@@ -20,7 +20,7 @@ self.addEventListener('install', () => {
 
 registerRoute(
   API_ENDPOINT.LIST,
-  new CacheFirst({
+  new StaleWhileRevalidate({
     cacheName: 'api-restaurant',
     plugins: [
       new ExpirationPlugin({
