@@ -16,7 +16,7 @@ const manifest = self.__WB_MANIFEST;
 console.log(manifest);
 
 precacheAndRoute(manifest, {
-  handleFetch: 'cacheFirst',
+  handleFetch: 'staleWhileRevalidate',
   cleanupOutdatedCaches: true,
 });
 
