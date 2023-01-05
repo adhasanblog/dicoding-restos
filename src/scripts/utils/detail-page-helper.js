@@ -1,9 +1,9 @@
 import RestaurantDataSource from '../data/restaurant-datasource';
 import CONFIG from '../global/config';
-import HeaderRestaurant from '../views/templates/Detail/Header';
-import ContentRestaurant from '../views/templates/Detail/Content';
-import FooterRestaurant from '../views/templates/Detail/Footer';
-import ButtonFavorite from '../views/templates/Detail/ButtonFavorite';
+import HeaderRestaurant from '../views/templates/detail/Header';
+import ContentRestaurant from '../views/templates/detail/Content';
+import FooterRestaurant from '../views/templates/detail/Footer';
+import ButtonFavorite from '../views/templates/detail/ButtonFavorite';
 
 const DetailPageHelper = {
   async init({ container, url }) {
