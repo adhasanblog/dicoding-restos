@@ -8,9 +8,7 @@ class RestaurantDataSource {
   }
 
   static async restoDetail(id) {
-    const response = await fetch(API_ENDPOINT.DETAIL(id), {
-      cache: 'no-cache',
-    });
+    const response = await fetch(API_ENDPOINT.DETAIL(id));
     const responseJSON = await response.json();
     return responseJSON.restaurant;
   }
