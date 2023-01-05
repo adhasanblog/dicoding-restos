@@ -12,16 +12,7 @@ import {
 import API_ENDPOINT from './global/api-endpoint';
 
 precacheAndRoute(self.__WB_MANIFEST, {
-  handleFetch: new StaleWhileRevalidate({
-    cacheName: 'restaurant-list',
-    skipWaiting: true,
-    plugins: [
-      new ExpirationPlugin({
-        maxEntries: 50,
-        maxAgeSeconds: 24 * 60 * 60,
-      }),
-    ],
-  }),
+  handleFetch: 'cacheFirst',
   cleanupOutdatedCaches: true,
 });
 
