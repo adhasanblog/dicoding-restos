@@ -1,0 +1,79 @@
+.header-restaurant {
+  width: 100%;
+  max-width: 1320px;
+  margin: auto;
+  padding: 0 24px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  @media screen and (min-width: 550px) {
+    text-align: left;
+  }
+
+  h2 {
+    grid-area: title;
+    font-size: 1.75rem;
+    font-weight: 700;
+    border-bottom: 1px solid rgba(35, 38, 49, 0.2);
+  }
+
+  &__description {
+    grid-area: description;
+
+    .top {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      padding-bottom: 6px;
+
+      @media screen and (min-width: 550px) {
+        grid-template-columns: repeat(3, max-content);
+        padding: 0;
+      }
+
+      p {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        gap: 4px;
+
+        &:not(:last-child)::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          right: -6px;
+          bottom: 0;
+          width: 1px;
+          background-color: currentColor;
+        }
+
+        @media screen and (min-width: 550px) {
+          flex-direction: row;
+        }
+      }
+    }
+
+    .bottom {
+      padding-top: 6px;
+      text-align: center;
+
+      @media screen and (min-width: 550px) {
+        text-align: left;
+        padding: 0;
+      }
+    }
+  }
+
+  &__action {
+    grid-area: action;
+
+    svg {
+      font-sieze: 20px;
+    }
+  }
+}

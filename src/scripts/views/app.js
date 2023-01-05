@@ -15,14 +15,8 @@ class App {
 
   _initialAppShell() {
     DrawerInitiator.init({
-      button: this._button.hamburgerButton,
+      button: this._button,
       drawer: this._drawer,
-      content: this._content,
-    });
-
-    SearchInitiator.init({
-      button: this._button.searchButton,
-      search: this._search,
       content: this._content,
     });
   }

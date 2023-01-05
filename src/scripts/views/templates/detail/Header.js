@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html } from 'lit';
 
 export default class HeaderRestaurant extends LitElement {
   static properties = {
@@ -10,97 +10,17 @@ export default class HeaderRestaurant extends LitElement {
     this.restaurant = null;
   }
 
-  static styles = [
-    css`
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      .header-restaurant {
-        width: 100%;
-        max-width: 1320px;
-        margin: auto;
-        padding: 24px 24px 0;
-        border-radius: 6px;
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-      }
-
-      .header-restaurant h2 {
-        grid-area: title;
-        font-size: 1.75rem;
-        font-weight: 700;
-        border-bottom: 1px solid rgba(35, 38, 49, 0.2);
-      }
-
-      .header-restaurant__description {
-        grid-area: description;
-      }
-
-      .header-restaurant__description .top {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 12px;
-        padding-bottom: 6px;
-      }
-      .header-restaurant__description .top p {
-        display: flex;
-        flex-direction: column;
-        position: relative;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        gap: 4px;
-      }
-
-      .header-restaurant__description .top p:not(:last-child)::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: -6px;
-        bottom: 0;
-        width: 1px;
-        background-color: rgba(35, 38, 49, 0.2);
-      }
-      .header-restaurant__description .bottom {
-        padding-top: 6px;
-        text-align: center;
-      }
-      .header-restaurant__action {
-        grid-area: action;
-      }
-
-      svg {
-        font-sieze: 20px;
-      }
-
-      @media screen and (min-width: 550px) {
-        .header-restaurant {
-          text-align: left;
-        }
-        .header-restaurant__description .top {
-          grid-template-columns: repeat(3, max-content);
-          padding: 0;
-        }
-
-        .header-restaurant__description .top p {
-          flex-direction: row;
-        }
-
-        .header-restaurant__description .bottom {
-          text-align: left;
-          padding: 0;
-        }
-      }
-    `,
-  ];
-
   render() {
     return html`
-      <header class="header-restaurant">
+      <div
+        class="header-restaurant"
+        tabindex="0"
+        aria-label="${this.restaurant
+          .name} Restaurant. Category : ${this.restaurant.categories
+          .map((category) => category.name)
+          .join(', ')}. Rating ${this.restaurant.rating} with ${this.restaurant
+          .customerReviews.length} Reviews. Located in ${this.restaurant
+          .city}, ${this.restaurant.address}">
         <h2>${this.restaurant.name}</h2>
         <div class="header-restaurant__description">
           <div class="top">
@@ -153,8 +73,12 @@ export default class HeaderRestaurant extends LitElement {
             </p>
           </div>
         </div>
-      </header>
+      </div>
     `;
+  }
+
+  createRenderRoot() {
+    return this;
   }
 }
 

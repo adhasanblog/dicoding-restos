@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html } from 'lit';
 import { map } from 'lit/directives/map.js';
 import { range } from 'lit/directives/range.js';
 
@@ -23,92 +23,13 @@ export default class ReviewRestaurant extends LitElement {
     this.inPage = null;
   }
 
-  static styles = css`
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    .reviews {
-      display: grid;
-      gap: 6px;
-    }
+  connectedCallback() {
+    super.connectedCallback();
 
-    .reviews h3 {
-      padding: 24px 0 6px 0;
-      border-bottom: 1px solid rgba(35, 38, 49, 0.2);
-      margin-bottom: 24px;
-    }
-    .review-item {
-      position: relative;
-      padding: 24px;
-      border: 1px solid rgba(35, 38, 49, 0.2);
-      border-radius: 6px 0 6px 0;
-      display: flex;
-      justify-content: space-between;
-    }
-    .review-item svg {
-      position: absolute;
-      right: 24px;
-    }
-    .customer {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .customer span {
-      display: none;
-    }
-
-    .customer h4 {
-      color: #232631;
-    }
-
-    p {
-      color: #232631;
-    }
-    .review-paging {
-      margin-top: 24px;
-    }
-    .review-paging ul {
-      display: flex;
-      gap: 12px;
-      list-style: none;
-      justify-content: center;
-    }
-    .review-paging ul li {
-      position: relative;
-      padding: 12px;
-      border: 1px solid black;
-    }
-    .review-paging ul li a {
-      position: absolute;
-      inset: 0;
-      text-align: center;
-      text-decoration: none;
-      color: #5a4fcf;
-    }
-    .review-paging ul li a.active {
-      box-shadow: inset -1px -1px 4px rgba(0, 0, 0, 0.4);
-    }
-
-    @media screen and (min-width: 460px) {
-      .customer span {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background-color: #fdc886;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        font-size: 2rem;
-        color: #ffffff;
-        text-align: center;
-      }
-    }
-  `;
+    document.addEventListener('review-submitted', () => {
+      this.updateReview();
+    });
+  }
 
   clickHandler({ offset, limit }) {
     this.offset = offset;
@@ -123,14 +44,17 @@ export default class ReviewRestaurant extends LitElement {
     let limit = 5;
     const { customerReviews } = this.restaurant;
     return html`
-      <div class="reviews">
-        <h3>
+      <div class="reviews" id="reviews">
+        <h3 tabindex="0">
           What Our Customers Are Saying : ${customerReviews.length} Reviews
         </h3>
         ${map(
           customerReviews.slice(this.offset, this.limit),
           (review) => html`
-            <div class="review-item">
+            <div
+              class="reviews__item"
+              tabindex="0"
+              aria-label="${review.name} says, ${review.review} on ${review.date}">
               <div class="customer">
                 <span>${review.name.charAt(0)}</span>
                 <div>
@@ -151,19 +75,19 @@ export default class ReviewRestaurant extends LitElement {
             </div>
           `,
         )}
-        <nav class="review-paging">
+        <nav class="reviews__paging">
           <ul>
             ${map(
               range(totalPage),
               (i) =>
                 html`<li>
                   <a
-                    href="#"
+                    aria-label="Review Page ${i + 1}"
+                    href="./#/detail/${this.restaurant.id}#reviews"
                     @click=${(event) => {
                       const offset = event.target.dataset.offset;
                       const limit = event.target.dataset.limit;
-                      const listAnchor =
-                        this.shadowRoot.querySelectorAll('li a');
+                      const listAnchor = this.querySelectorAll('li a');
 
                       listAnchor.forEach((anchor) => {
                         if (anchor.classList.contains('active')) {
@@ -172,7 +96,6 @@ export default class ReviewRestaurant extends LitElement {
                       });
 
                       event.target.classList.add('active');
-                      event.preventDefault();
                       this.clickHandler({
                         offset,
                         limit,
@@ -189,6 +112,17 @@ export default class ReviewRestaurant extends LitElement {
         </nav>
       </div>
     `;
+  }
+
+  async updateReview() {
+    const restaurant = await RestaurantDataSource.restoDetail(
+      this.restaurant.id,
+    );
+    this.restaurant = restaurant;
+  }
+
+  createRenderRoot() {
+    return this;
   }
 }
 

@@ -2,12 +2,12 @@
   position: sticky;
   top: 0;
   z-index: 99;
-  box-shadow: 0 2px 4px 0 rgba($color: #232631, $alpha: 0.2);
 
   padding: 12px 24px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  background-color: rgba($color: #ffffff, $alpha: 1);
+  background-color: inherit;
+  color: inherit;
 
   &__navigation {
     position: absolute;
@@ -39,7 +39,8 @@
           font-size: 1rem;
           font-weight: 600;
           text-decoration: none;
-          color: rgba($color: #232631, $alpha: 0.75);
+          color: inherit;
+          opacity: 0.75;
         }
       }
     }
@@ -52,7 +53,7 @@
     justify-self: center;
 
     h1 {
-      color: #232631;
+      color: inherit;
       font-size: 1.75rem;
     }
   }
@@ -67,11 +68,11 @@
     align-items: center;
     justify-content: center;
     font-size: 1rem;
-    color: rgba(35, 38, 49, 0.75);
+    color: inherit;
+    opacity: 0.75;
 
     border-radius: 50%;
     border: 0;
-    z-index: 9999;
   }
 
   &__menu {
@@ -105,8 +106,7 @@
 
         li {
           &:hover a {
-            font-weight: 500;
-            color: rgba($color: #232631, $alpha: 1);
+            opacity: 1;
 
             &::after {
               content: '';

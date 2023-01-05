@@ -5,7 +5,9 @@ const CONFIG = {
     medium: 'https://restaurant-api.dicoding.dev/images/medium/',
     large: 'https://restaurant-api.dicoding.dev/images/large/',
   },
-  CACHE_NAME: 'Restos-RestaurantDatabook-V1',
+  DATABASE_NAME: 'restaurants-catalogue-database',
+  DATABASE_VERSION: 1,
+  OBJECT_STORE_NAME: 'restaurants',
 };
 
 export default CONFIG;

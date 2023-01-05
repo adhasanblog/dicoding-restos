@@ -1,39 +1,17 @@
-.resto-list {
-  display: flex;
-  flex-direction: column;
-  max-width: 1320px;
-  margin: auto;
+restaurants-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
 
-  .restos-not-found {
-    display: block;
-    width: 100%;
-    max-width: 1320px;
-    margin: auto;
-    padding: 12px 24px;
-
-    p {
-      font-size: 24px;
-      font-style: italic;
-      color: rgba($color: #232631, $alpha: 0.4);
-    }
+  @media screen and (min-width: 650px) {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  a {
-    width: 100%;
-    max-width: 300px;
-    min-width: 150px;
-    padding: 18px 0;
-    margin: 24px 24px;
-    background-color: rgba($color: #fdc886, $alpha: 1);
+  @media screen and (min-width: 850px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 
-    text-align: center;
-    text-decoration: none;
-    font-weight: 600;
-    color: rgba($color: #232631, $alpha: 1);
-    border: none;
-    border-radius: 12px;
-
-    align-self: center;
-    cursor: pointer;
+  @media screen and (min-width: 1200px) {
+    grid-template-columns: repeat(4, 1fr);
   }
 }

@@ -1,23 +1,38 @@
 const SearchInitiator = {
   init({ button, search, content }) {
-    const symbol = document.querySelector('i');
     button.addEventListener('click', (event) => {
-      this._toogleDrawer(symbol, event, search);
+      this._toogleDrawer({ event, search, content });
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.ctrlKey && event.key === '/') {
+        this._toogleDrawer({ event, search, content });
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        this._closeDrawer({ event, search, content });
+      }
     });
 
     content.addEventListener('click', (event) => {
-      this._closeDrawer(symbol, event, search);
+      this._closeDrawer({ event, search, content });
     });
   },
 
-  _toogleDrawer(symbol, event, search) {
+  _toogleDrawer({ event, search, content }) {
     event.stopPropagation();
-    search.classList.toggle('active');
+    search.classList.add('active');
+    content.classList.add('active');
+    search.tabIndex = '0';
   },
 
-  _closeDrawer(symbol, event, search) {
+  _closeDrawer({ event, search, content }) {
     event.stopPropagation();
     search.classList.remove('active');
+    content.classList.remove('active');
+    search.tabIndex = '-1';
   },
 };
 

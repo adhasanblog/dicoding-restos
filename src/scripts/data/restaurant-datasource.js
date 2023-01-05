@@ -8,7 +8,9 @@ class RestaurantDataSource {
   }
 
   static async restoDetail(id) {
-    const response = await fetch(API_ENDPOINT.DETAIL(id));
+    const response = await fetch(API_ENDPOINT.DETAIL(id), {
+      cache: 'no-cache',
+    });
     const responseJSON = await response.json();
     return responseJSON.restaurant;
   }
@@ -27,11 +29,12 @@ class RestaurantDataSource {
       headers: {
         'Content-Type': 'application/json',
       },
+      cache: 'no-cache',
       body: JSON.stringify(customerReview),
     });
 
     const responseJSON = await response.json();
-    return responseJSON.customerReviews;
+    return responseJSON;
   }
 }
 

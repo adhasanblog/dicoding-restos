@@ -1,26 +1,46 @@
-import RestaurantDataSource from '../../data/restaurant-datasource';
 import UrlParser from '../../routes/url-parse';
 import DetailPageHelper from '../../utils/detail-page-helper';
-import SubmitReviewInitiator from '../../utils/submit-review-initiator';
 
 const Detail = {
   async render() {
     return `
-       <article>
-       
+       <article id="detailRestaurant">
+       <header id="headerRestaurant">
+       </header>
+       <div id="contentRestaurant"></div>
+       <footer id="footerRestaurant"></footer>
        </article>
-
     `;
   },
 
   async afterRender() {
     const url = UrlParser.parseActiveUrlWithoutCombiner();
-    const articleContainer = document.querySelector('article');
+
+    const headerRestaurantContainer =
+      document.querySelector('#headerRestaurant');
+    const contentRestaurantContainer =
+      document.querySelector('#contentRestaurant');
+    const footerRestaurantContainer =
+      document.querySelector('#footerRestaurant');
 
     DetailPageHelper.init({
-      id: url.id,
-      container: articleContainer,
+      url,
+      container: {
+        header: headerRestaurantContainer,
+        content: contentRestaurantContainer,
+        footer: footerRestaurantContainer,
+      },
     });
+    // const buttonFavorite = document.createElement('button-favorite');
+
+    // detailPage.restaurant = restaurant;
+
+    // buttonFavorite.restaurant = restaurant;
+
+    // buttonFavorite.innerHTML = ``;
+
+    // articleContainer.appendChild(detailPage);
+    // articleContainer.appendChild(buttonFavorite);
   },
 };
 

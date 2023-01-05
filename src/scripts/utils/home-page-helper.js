@@ -1,51 +1,38 @@
 import RestaurantDataSource from '../data/restaurant-datasource';
-import CONFIG from '../global/config';
-import CardList from '../views/templates/CardList';
-import HeroCarousel from '../views/templates/HeroCarosel';
+import HeroBanner from '../views/templates/HeroBanner';
+import RestaurantsList from '../views/templates/RestaurantsList';
 import SearchBar from '../views/templates/SearchBar';
 
 const HomePageHelper = {
   async init({ container }) {
     const restos = await RestaurantDataSource.restoList();
+
     this._showCardListSection({
       datas: restos,
       container: container.restaurant,
     });
 
-    this._showHeroCarousel({
-      datas: restos,
-      container: container.hero,
-    });
+    this._showHeroCarousel(container.hero);
   },
-  _showHeroCarousel({ datas, container }) {
-    const test = `
-      <hero-carousel id="carousel">
-        ${datas
-          .map(
-            (data) =>
-              `<img src=${CONFIG.BASE_IMG_URL.large + data.pictureId} alt="">`,
-          )
-          .join('')}
-      </hero-carousel>
-    `;
 
-    container.innerHTML = test;
+  _showHeroCarousel(container) {
+    const heroBanner = document.createElement('hero-banner');
+    heroBanner.image = './images/hero-image.jpg';
+    (heroBanner.withTitle = true),
+      (heroBanner.titleText = [
+        'Discover the Best Restaurants in Town',
+        'Explore a Wide Range of Cuisine Options',
+      ]);
+
+    container.appendChild(heroBanner);
   },
 
   _showCardListSection({ datas, container }) {
-    const cardList = document.createElement('card-list');
+    const restaurantsList = document.createElement('restaurants-list');
 
-    window.addEventListener('get-data', (event) => {
-      const restaurants = event.detail.datas;
-      if (restaurants) {
-        cardList.datas = restaurants;
-        return;
-      }
-    });
+    restaurantsList.datas = datas;
 
-    cardList.datas = datas;
-
-    container.insertBefore(cardList, container.children[1]);
+    container.appendChild(restaurantsList);
   },
 };
 

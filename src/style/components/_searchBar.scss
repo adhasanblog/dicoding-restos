@@ -1,0 +1,39 @@
+search-bar {
+  background-color: inherit;
+
+  .search-bar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 24px;
+    margin: 0 auto 24px;
+    background-color: inherit;
+    border-radius: 0 0 12px 12px;
+    transform: scale(0);
+    transform-origin: center;
+    transition: all 0.5s ease-in;
+    overflow-y: auto;
+
+    form {
+      padding: 12px 0;
+
+      label {
+        display: inline-block;
+        padding: 12px 0 0;
+      }
+
+      input {
+        width: 100%;
+        padding: 12px;
+        border-radius: 12px;
+        border: 0.5px solid rgba(35, 38, 49, 0.75);
+      }
+    }
+  }
+  &.active .search-bar {
+    transform: scale(100%);
+  }
+}

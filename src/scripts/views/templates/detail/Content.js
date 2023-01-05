@@ -1,5 +1,9 @@
 import { LitElement, html, css } from 'lit';
 import { map } from 'lit/directives/map.js';
+import DescriptionRestaurant from './Description';
+import ReviewRestaurant from './Review';
+import FormReview from './Form';
+import MenuRestaurant from './Menu';
 
 export default class ContentRestaurant extends LitElement {
   static properties = {
@@ -31,68 +35,6 @@ export default class ContentRestaurant extends LitElement {
       },
     ];
   }
-
-  static styles = css`
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    .content {
-      width: 100%;
-      max-width: 1320px;
-      background-color: #ffffff;
-      margin: auto;
-      padding: 0 24px;
-    }
-
-    .tab-menu {
-    }
-
-    .tab-menu ul {
-      position: relative;
-      height: 50px;
-      display: flex;
-      list-style: none;
-      border: 1px solid rgba(35, 38, 49, 0.2);
-    }
-
-    .tab-menu ul li a {
-      position: relative;
-      display: flex;
-      text-decoration: none;
-      color: #232631;
-      background: transparant;
-      height: 100%;
-      padding: 0 24px;
-      align-items: center;
-    }
-
-    .tab-menu ul li a.active {
-      border-bottom: 1px solid white;
-      color: #5a4fcf;
-    }
-
-    .tab-menu ul li a.active::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      right: 0;
-      background: #5a4fcf;
-      height: 5px;
-      z-index: 10;
-    }
-
-    .tab-content {
-      height: auto;
-      min-height: 300px;
-      padding: 24px;
-      border: 1px solid rgba(35, 38, 49, 0.2);
-      border-top: none;
-    }
-  `;
 
   clickHandler(id) {
     this.tabs = this.tabs.map((tab) => ({ ...tab, active: tab.id === id }));
@@ -131,6 +73,10 @@ export default class ContentRestaurant extends LitElement {
         )}
       </div>
     `;
+  }
+
+  createRenderRoot() {
+    return this;
   }
 }
 

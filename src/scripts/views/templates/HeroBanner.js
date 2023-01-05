@@ -1,51 +1,36 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html } from 'lit';
+import { map } from 'lit/directives/map.js';
 import CONFIG from '../../global/config';
 
 export default class HeroBanner extends LitElement {
   static properties = {
-    image: {},
+    image: { type: String },
+    withTitle: { type: Boolean },
+    titleText: { type: Array },
   };
 
   constructor() {
     super();
     this.image = null;
+    this.withTitle = false;
+    this.titleText = null;
   }
-
-  static styles = css`
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    .hero {
-      width: 100%;
-      max-width: 1320px;
-      margin: auto;
-      height: 400px;
-      overflow: hidden;
-    }
-
-    .hero img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-    }
-
-    @media screen and (min-width: 1000px) {
-      .hero {
-        padding: 0 24px;
-      }
-    }
-  `;
 
   render() {
     return html`
-      <div class="hero">
-        <img src=${CONFIG.BASE_IMG_URL.large + this.image.pictureId} alt="" />
+      <div class="hero-container">
+        <img src=${this.image} alt="" />
+        ${this.withTitle
+          ? html`<div class="title">
+              ${map(this.titleText, (title) => html`<p>${title}</p>`)}
+            </div>`
+          : ''}
       </div>
     `;
+  }
+
+  createRenderRoot() {
+    return this;
   }
 }
 

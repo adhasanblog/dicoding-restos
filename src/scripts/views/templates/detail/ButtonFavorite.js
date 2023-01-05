@@ -1,33 +1,61 @@
 import { LitElement, html, css } from 'lit';
+import FavoriteRestaurant from '../../../data/favorite-restaurant-idb';
 
 export default class ButtonFavorite extends LitElement {
   static properties = {
-    liked: { type: Boolean },
+    favorite: { type: Boolean },
+    restaurant: { type: Object },
   };
 
   constructor() {
     super();
-    this.liked = false;
+    this.favorite;
+    this.restaurant = {};
   }
 
-  static styles = css`
-    button {
-      background-color: gray;
-      border: 1 solid black;
+  static styles = css``;
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.restaurantExistInDB(this.restaurant.id);
+  }
+
+  async restaurantExistInDB(id) {
+    const restaurant = await FavoriteRestaurant.getRestaurant(id);
+    if (!!restaurant) {
+      this.favorite = true;
+    } else {
+      this.favorite = false;
     }
-  `;
-
-  likeHandler() {
-    this.liked = !this.liked;
   }
+
+  async clickHandler() {
+    if (!this.favorite) {
+      await FavoriteRestaurant.putRestaurant(this.restaurant);
+      this.favorite = true;
+    } else {
+      await FavoriteRestaurant.deleteRestaurant(this.restaurant.id);
+      this.favorite = false;
+    }
+  }
+
   render() {
     return html`
-      <div class="">
-        ${this.liked
-          ? html` <button @click=${this.likeHandler}>Unlike</button>`
-          : html` <button @click=${this.likeHandler}>Like</button>`}
-      </div>
+      <button
+        class="button-favorite"
+        aria-label="${this.favorite
+          ? 'Remove from favorites'
+          : 'Add to favorites'}"
+        @click=${this.clickHandler}>
+        ${this.favorite
+          ? html` <i class="fa-solid fa-heart"></i> `
+          : html` <i class="fa-regular fa-heart"></i> `}
+      </button>
     `;
+  }
+
+  createRenderRoot() {
+    return this;
   }
 }
 
