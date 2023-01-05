@@ -7,7 +7,10 @@ import ButtonFavorite from '../views/templates/detail/ButtonFavorite';
 
 const DetailPageHelper = {
   async init({ container, url }) {
-    let restaurant = await RestaurantDataSource.restoDetail(url.id);
+    let restaurant = await RestaurantDataSource.restoDetail({
+      id: url.id,
+      cache: 'default',
+    });
 
     const { header, content, footer } = container;
 

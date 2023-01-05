@@ -115,9 +115,10 @@ export default class ReviewRestaurant extends LitElement {
   }
 
   async updateReview() {
-    const restaurant = await RestaurantDataSource.restoDetail(
-      this.restaurant.id,
-    );
+    const restaurant = await RestaurantDataSource.restoDetail({
+      id: this.restaurant.id,
+      cache: 'reload',
+    });
     this.restaurant = restaurant;
   }
 
