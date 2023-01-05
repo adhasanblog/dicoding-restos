@@ -11,7 +11,11 @@ import {
 
 import API_ENDPOINT from './global/api-endpoint';
 
-precacheAndRoute(self.__WB_MANIFEST, {
+const manifest = self.__WB_MANIFEST;
+
+console.log(manifest);
+
+precacheAndRoute(manifest, {
   handleFetch: 'cacheFirst',
   cleanupOutdatedCaches: true,
 });

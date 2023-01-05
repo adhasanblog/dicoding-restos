@@ -39,7 +39,6 @@ module.exports = merge(common, {
     ],
     splitChunks: {
       chunks: 'all',
-      maxSize: 500000,
     },
   },
   plugins: [
