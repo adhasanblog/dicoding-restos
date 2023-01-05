@@ -11,22 +11,23 @@ import {
 
 import API_ENDPOINT from './global/api-endpoint';
 
-precacheAndRoute(self.__WB_MANIFEST);
+precacheAndRoute(self.__WB_MANIFEST, {
+  strategy: 'StaleWhileRevalidate',
+  cleanupOutdatedCaches: true,
+});
 
 self.addEventListener('install', () => {
   console.log('Service Worker: Installed');
   self.skipWaiting();
 });
 
-registerRoute(
-  API_ENDPOINT.LIST,
-  new CacheFirst({
-    cacheName: 'restaurant-api',
-    plugins: [
-      new ExpirationPlugin({
-        maxEntries: 50,
-        maxAgeSeconds: 24 * 60 * 60,
-      }),
-    ],
-  }),
-);
+registerRoute(API_ENDPOINT.LIST, new StaleWhileRevalidate(), {
+  cacheName: 'api-restaurant',
+  skipWaiting: true,
+  plugins: [
+    new ExpirationPlugin({
+      maxEntries: 50,
+      maxAgeSeconds: 24 * 60 * 60,
+    }),
+  ],
+});
