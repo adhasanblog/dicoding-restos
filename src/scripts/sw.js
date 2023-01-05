@@ -12,7 +12,7 @@ import {
 import API_ENDPOINT from './global/api-endpoint';
 
 precacheAndRoute(self.__WB_MANIFEST, {
-  strategy: 'StaleWhileRevalidate',
+  strategy: 'CacheFirst',
   cleanupOutdatedCaches: true,
 });
 
