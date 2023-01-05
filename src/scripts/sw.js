@@ -12,7 +12,7 @@ import {
 import API_ENDPOINT from './global/api-endpoint';
 
 precacheAndRoute(self.__WB_MANIFEST, {
-  strategy: 'StaleWhileRevalidate',
+  strategy: 'CacheFirst',
   cleanupOutdatedCaches: true,
 });
 
@@ -21,8 +21,8 @@ self.addEventListener('install', () => {
   self.skipWaiting();
 });
 
-registerRoute(API_ENDPOINT.LIST, new StaleWhileRevalidate(), {
-  cacheName: 'api-restaurant',
+registerRoute(API_ENDPOINT.LIST, new CacheFirst(), {
+  cacheName: 'restaurant-list',
   skipWaiting: true,
   plugins: [
     new ExpirationPlugin({
