@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html } from 'lit';
 import { map } from 'lit/directives/map.js';
 import DescriptionRestaurant from './Description';
 import ReviewRestaurant from './Review';
@@ -54,11 +54,41 @@ export default class ContentRestaurant extends LitElement {
                       class=${tab.active ? 'active' : ''}
                       @click=${(event) => {
                         event.preventDefault();
+                        const targetElement =
+                          document.querySelector('.tab-content');
+                        const headerOffset = 50;
+                        const elementPosition =
+                          targetElement.getBoundingClientRect().top;
+                        const offsetPosition =
+                          elementPosition + window.pageYOffset - headerOffset;
+
+                        targetElement.focus();
+                        window.scrollTo({
+                          top: offsetPosition,
+                          behavior: 'smooth',
+                        });
+
                         this.clickHandler(tab.id);
                       }}
-                      href="#${tab.label}"
-                      >${tab.label}</a
-                    >
+                      @enter=${(event) => {
+                        event.preventDefault();
+                        const targetElement =
+                          document.querySelector('.tab-content');
+                        const headerOffset = 50;
+                        const elementPosition =
+                          targetElement.getBoundingClientRect().top;
+                        const offsetPosition =
+                          elementPosition + window.pageYOffset - headerOffset;
+
+                        targetElement.focus();
+                        window.scrollTo({
+                          top: offsetPosition,
+                          behavior: 'smooth',
+                        });
+                      }}
+                      href="#${tab.label}">
+                      ${tab.label}
+                    </a>
                   </li>
                 `,
             )}
@@ -66,7 +96,7 @@ export default class ContentRestaurant extends LitElement {
         </nav>
         ${map(this.tabs, (tab) =>
           tab.active
-            ? html`<div class="tab-content">
+            ? html`<div class="tab-content" tabindex="0" aria-label="Content">
                 ${tab.content(this.restaurant)}
               </div>`
             : '',

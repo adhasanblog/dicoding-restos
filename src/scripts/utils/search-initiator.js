@@ -25,14 +25,12 @@ const SearchInitiator = {
     event.stopPropagation();
     search.classList.add('active');
     content.classList.add('active');
-    search.tabIndex = '0';
   },
 
   _closeDrawer({ event, search, content }) {
     event.stopPropagation();
     search.classList.remove('active');
     content.classList.remove('active');
-    search.tabIndex = '-1';
   },
 };
 

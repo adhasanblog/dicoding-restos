@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html } from 'lit';
 import RestaurantDataSource from '../../../data/restaurant-datasource';
 
 export default class FormReview extends LitElement {
@@ -14,8 +14,6 @@ export default class FormReview extends LitElement {
       review: '',
     };
   }
-
-  static styles = css``;
 
   getInputName(event) {
     const input = event.target;

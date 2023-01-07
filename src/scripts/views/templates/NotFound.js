@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html } from 'lit';
 
 export default class NotFound extends LitElement {
   static properties = {};
@@ -6,8 +6,6 @@ export default class NotFound extends LitElement {
   constructor() {
     super();
   }
-
-  static styles = css``;
 
   render() {
     return html`

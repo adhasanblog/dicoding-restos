@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html } from 'lit';
 import FavoriteRestaurant from '../../../data/favorite-restaurant-idb';
 
 export default class ButtonFavorite extends LitElement {
@@ -12,8 +12,6 @@ export default class ButtonFavorite extends LitElement {
     this.favorite;
     this.restaurant = {};
   }
-
-  static styles = css``;
 
   connectedCallback() {
     super.connectedCallback();

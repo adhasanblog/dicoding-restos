@@ -26,17 +26,15 @@ export default class SearchBar extends LitElement {
     return html`
       <div class="search-bar">
         <form @submit=${this.handleSubmit} class="">
-          <label for="query">
-            Find restaurant name or category (press enter)
-          </label>
           <input
             type="text"
             @input=${this.handleInput}
             value=${this.query}
             name="query"
-            id="query" />
+            placeholder="Search by Restaurant name or Restaurant category" />
         </form>
-        <div class="search-bar__content">
+        <div class="container">
+          <h2>Search Result</h2>
           ${this.searchValue
             ? html`
                 <restaurants-list .datas=${this.restaurants}>

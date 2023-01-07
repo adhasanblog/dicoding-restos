@@ -20,7 +20,7 @@ export default class ReviewRestaurant extends LitElement {
     this.limit = 5;
     this.offset = 0;
     this.paginations = [];
-    this.inPage = null;
+    this.inPage = 1;
   }
 
   connectedCallback() {
@@ -31,9 +31,10 @@ export default class ReviewRestaurant extends LitElement {
     });
   }
 
-  clickHandler({ offset, limit }) {
+  clickHandler({ offset, limit, page }) {
     this.offset = offset;
     this.limit = limit;
+    this.inPage = page;
   }
 
   render() {
@@ -44,9 +45,10 @@ export default class ReviewRestaurant extends LitElement {
     let limit = 5;
     const { customerReviews } = this.restaurant;
     return html`
-      <div class="reviews" id="reviews">
-        <h3 tabindex="0">
-          What Our Customers Are Saying : ${customerReviews.length} Reviews
+      <div class="reviews" tabindex="0" aria-label="Customers Reviews">
+        <h3>
+          What Our Customers Are Saying, ${customerReviews.length} Reviews :
+          Page ${this.inPage}
         </h3>
         ${map(
           customerReviews.slice(this.offset, this.limit),
@@ -58,7 +60,7 @@ export default class ReviewRestaurant extends LitElement {
               <div class="customer">
                 <span>${review.name.charAt(0)}</span>
                 <div>
-                  <h4>${review.name}</h4>
+                  <h4>${review.name} | ${review.date}</h4>
                   <p>${review.review}</p>
                 </div>
               </div>
@@ -85,9 +87,24 @@ export default class ReviewRestaurant extends LitElement {
                     aria-label="Review Page ${i + 1}"
                     href="./#/detail/${this.restaurant.id}#reviews"
                     @click=${(event) => {
+                      event.preventDefault();
                       const offset = event.target.dataset.offset;
                       const limit = event.target.dataset.limit;
+                      const page = event.target.dataset.page;
                       const listAnchor = this.querySelectorAll('li a');
+
+                      const targetElement = document.querySelector('.reviews');
+                      const headerOffset = 45;
+                      const elementPosition =
+                        targetElement.getBoundingClientRect().top;
+                      const offsetPosition =
+                        elementPosition + window.pageYOffset - headerOffset;
+
+                      targetElement.focus();
+                      window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth',
+                      });
 
                       listAnchor.forEach((anchor) => {
                         if (anchor.classList.contains('active')) {
@@ -99,9 +116,11 @@ export default class ReviewRestaurant extends LitElement {
                       this.clickHandler({
                         offset,
                         limit,
+                        page,
                       });
                     }}
                     class=${i + 1 === 1 ? 'active' : ''}
+                    data-page=${i + 1}
                     data-offset=${i + 1 === 1 ? offset : (offset += 5)}
                     data-limit=${(i + 1) * limit}>
                     ${i + 1}

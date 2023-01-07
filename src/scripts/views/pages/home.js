@@ -7,11 +7,11 @@ const Home = {
         <section id="heroSection">
         </section>
         <div class="overlay"></div>
-        <search-bar></search-bar>
         <section>
           <div id="restaurantsContainer" class="container">
             <h2 tabindex="0">Featured Restaurants</h2>
             <button id="searchButton" class="search-button">Search Restaurant</button>
+            <search-bar></search-bar>
           </div>
         </section>
        
@@ -26,8 +26,6 @@ const Home = {
     const overlay = document.querySelector('.overlay');
     const searchBar = document.querySelector('search-bar');
     const buttonSearch = document.querySelector('#searchButton');
-
-    console.log(mainContent);
 
     HomePageHelper.init({
       container: {

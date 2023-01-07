@@ -101,5 +101,11 @@
   a {
     position: absolute;
     inset: 0;
+
+    &:focus {
+      color: inherit;
+      background-color: currentColor;
+      opacity: 0.3;
+    }
   }
 }

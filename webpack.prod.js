@@ -4,7 +4,8 @@ const common = require('./webpack.common');
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const { url } = require('inspector');
+const ImageMinimazerPlugin = require('image-minimizer-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = merge(common, {
   mode: 'production',
@@ -36,6 +37,11 @@ module.exports = merge(common, {
         },
       }),
       new CssMinimizerPlugin(),
+      new ImageMinimazerPlugin({
+        minimizer: {
+          implementation: ImageMinimazerPlugin.squooshMinify,
+        },
+      }),
     ],
     splitChunks: {
       chunks: 'all',
@@ -46,5 +52,7 @@ module.exports = merge(common, {
       swSrc: path.resolve(__dirname, 'src/scripts/sw.js'),
       swDest: './sw.bundle.js',
     }),
+
+    new CompressionPlugin(),
   ],
 });

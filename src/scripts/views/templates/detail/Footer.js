@@ -1,5 +1,4 @@
-import { LitElement, html, css } from 'lit';
-import { map } from 'lit/directives/map.js';
+import { LitElement, html } from 'lit';
 import RestaurantDataSource from '../../../data/restaurant-datasource';
 
 export default class FooterRestaurant extends LitElement {
@@ -33,9 +32,7 @@ export default class FooterRestaurant extends LitElement {
     );
 
     return html`
-      <div class="footer-restaurant">
-        <h2>Restaurants in the Same City</h2>
-      </div>
+      <h2>Restaurants in the Same City</h2>
       <restaurants-list .datas=${this.sameCityRestaurants}></restaurants-list>
     `;
   }

@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html } from 'lit';
 import { map } from 'lit/directives/map.js';
 
 export default class MenuRestaurant extends LitElement {
